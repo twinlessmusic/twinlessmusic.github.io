@@ -1,6 +1,6 @@
 # TWINLΞSS – official website
 
-Live: https://durdumuazzez.github.io/twinless/
+Live: https://twinlessmusic.github.io/
 
 Static site hosted for free on GitHub Pages.
 
