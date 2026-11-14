@@ -140,7 +140,10 @@ h2 {
 /* Twin-ring background (sits behind the photo only) */
 .about { overflow: hidden; }
 .about__text { position: relative; z-index: 2; }
-.about__duo { position: relative; max-width: 620px; margin: 0 auto; isolation: isolate; }
+.about__duo { position: relative; max-width: 620px; margin: 0 0 0 auto; isolation: isolate; }
+/* photo reaches the right screen edge (like the EPK), so the wave file's right edge is hidden by the section clip */
+.about__photo { margin-right: calc(-1 * var(--gutter)); }
+@media (min-width: 1180px) { .about__photo { margin-right: calc(-1 * (var(--gutter) + (100vw - 1180px) / 2)); } }
 /* EPK wave file: 132% of the photo width, anchored bottom-right; .about clips the overflow */
 .about__photo .about__waves { position: absolute; right: 0; bottom: 0; width: 132%; max-width: none; height: auto; z-index: 0; pointer-events: none; }
 .about__photo img { position: relative; z-index: 1; width: 100%; }
