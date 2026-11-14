@@ -145,7 +145,10 @@ h2 {
 .about__photo { margin-right: calc(-1 * var(--gutter)); }
 @media (min-width: 1180px) { .about__photo { margin-right: calc(-1 * (var(--gutter) + (100vw - 1180px) / 2)); } }
 /* EPK wave pattern continued to the page edge: original drawing stays at 132% of the photo width (frame is 2594/794 wider = 431.2%), anchored bottom-right; .about clips the overflow */
-.about__photo .about__waves { position: absolute; right: 0; bottom: 0; width: 431.2%; max-width: none; height: auto; z-index: 0; pointer-events: none; }
+.about__photo .about__waves { position: absolute; right: 0; bottom: 0; width: 431.2%; max-width: none; height: auto; z-index: 0; pointer-events: none;
+  /* rings fade out softly to the left: only their faint outer ends reach under the text */
+  -webkit-mask-image: linear-gradient(to right, transparent 64%, #000 78%);
+          mask-image: linear-gradient(to right, transparent 64%, #000 78%); }
 .about__photo img { position: relative; z-index: 1; width: 100%; }
 @media (min-width: 900px) { .about__grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
 
