@@ -137,12 +137,14 @@ h2 {
 .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
 .tags li { border: 1px solid var(--lilac); color: var(--lilac); padding: 9px 16px; font-family: var(--display); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
 .about__photo { margin: 0; position: relative; }
-.about__photo::before {
-  content: ""; position: absolute; left: 10%; right: 10%; top: 12%; bottom: 0; z-index: 0;
-  background: radial-gradient(closest-side, rgba(183,148,255,.35), transparent);
-  filter: blur(20px);
-}
-.about__photo img { position: relative; width: 100%; max-width: 620px; margin: 0 auto; }
+/* Twin-ring background (sits behind the photo only) */
+.about { overflow: hidden; }
+.about__text { position: relative; z-index: 2; }
+.about__duo { position: relative; max-width: 620px; margin: 0 auto; isolation: isolate; }
+/* wider than the photo (190% × 110%) but sized from it, so it scales with the photo; .about clips the overflow */
+.about__waves { position: absolute; top: -10%; left: -45%; width: 190%; height: 110%; z-index: 0; pointer-events: none; overflow: hidden; }
+.about__waves circle { vector-effect: non-scaling-stroke; }
+.about__photo img { position: relative; z-index: 1; width: 100%; }
 @media (min-width: 900px) { .about__grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
 
 /* Music */
