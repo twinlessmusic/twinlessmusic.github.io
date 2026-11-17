@@ -18,7 +18,6 @@
    ===================================================================== */
 
 const GIGS = [
-  { date: "2026-12-04", venue: "unter freunden", event: "Anniversary Night",        city: "Cologne", link: "" },
   { date: "2026-12-12", venue: "LAP Coffee",     event: "Glüh Up before Christmas", city: "Cologne", link: "" },
   { date: "2026-12-19", venue: "Black Coffee",   event: "Night Session",            city: "Cologne", link: "" },
 ];
