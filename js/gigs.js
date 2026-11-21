@@ -3,23 +3,38 @@
    ---------------------------------------------------------------------
    This is the ONLY place you need to edit to update the gigs list.
 
-   ADD a gig:    copy one line { ... }, paste it in the list, change it.
-   REMOVE a gig: delete its whole line.
+   ADD a gig:    copy one gig block { ... }, paste it in the list, change it.
+   REMOVE a gig: delete its whole block, from { to },
    Order does not matter – the website sorts gigs by date.
    Past gigs are hidden automatically the day after they happen.
 
    date   → "YYYY-MM-DD"   (year-month-day, e.g. "2026-12-04")
    venue  → club / place name
    event  → name of the night (can be "")
+   time   → shown small under the event name, e.g. "21:00 – 00:00" or "Time TBA"
+            (use "" to hide it)
    city   → city
-   link   → ticket or event link (use "" if there is none)
+   map    → Google Maps link of the venue. Shows a "Map ↗" link that opens
+            in a new tab. In Google Maps: Share → Copy link, then paste it here.
+            (use "" if there is none)
+   link   → ticket or event link. Shows a "Tickets ↗" link (use "" if none)
 
-   Keep the quotes "..." and the comma at the end of each line.
+   Keep the quotes "..." and the commas exactly like in the examples.
    ===================================================================== */
 
 const GIGS = [
-  { date: "2026-12-12", venue: "LAP Coffee",     event: "Glüh Up before Christmas", city: "Cologne", link: "" },
-  { date: "2026-12-19", venue: "Black Coffee",   event: "Night Session",            city: "Cologne", link: "" },
+  {
+    date: "2026-12-04", venue: "Dreamisu", event: "DJ Set", time: "Time TBA", city: "Cologne",
+    map: "https://maps.app.goo.gl/SBqHKs3AHFNFFbu59", link: "",
+  },
+  {
+    date: "2026-12-12", venue: "LAP Coffee", event: "Coffee Rave", time: "18:00 – 21:00", city: "Cologne",
+    map: "https://maps.app.goo.gl/Q3nRRkDAnoX3juVW7", link: "",
+  },
+  {
+    date: "2026-12-19", venue: "Black Coffee", event: "Night Session", time: "21:00 – 00:00", city: "Cologne",
+    map: "https://maps.app.goo.gl/3t4rHgqSq4m1q6bu6", link: "",
+  },
 ];
 
 /* ---------- no need to edit anything below this line ---------- */
@@ -43,12 +58,14 @@ const GIGS = [
 
   list.innerHTML = upcoming.map((g) => {
     const day = String(g.d.getDate()).padStart(2, "0");
-    const action = g.link
-      ? `<a class="gig__cta" href="${esc(g.link)}" target="_blank" rel="noopener">Tickets ↗</a>`
-      : `<span class="gig__cta gig__cta--muted">Info soon</span>`;
+    const links = [
+      g.map ? `<a class="gig__cta" href="${esc(g.map)}" target="_blank" rel="noopener">Map ↗</a>` : "",
+      g.link ? `<a class="gig__cta" href="${esc(g.link)}" target="_blank" rel="noopener">Tickets ↗</a>` : "",
+    ].join("");
+    const action = links ? `<div class="gig__links">${links}</div>` : "";
     return `<li class="gig">
       <time class="gig__date" datetime="${esc(g.date)}"><span class="gig__day">${day}</span><span class="gig__mon">${months[g.d.getMonth()]} · ${days[g.d.getDay()]}</span></time>
-      <div class="gig__what"><strong>${esc(g.venue)}</strong>${g.event ? `<span>${esc(g.event)}</span>` : ""}</div>
+      <div class="gig__what"><strong>${esc(g.venue)}</strong>${g.event ? `<span>${esc(g.event)}</span>` : ""}${g.time ? `<small class="gig__time">${esc(g.time)}</small>` : ""}</div>
       <span class="gig__city">${esc(g.city)}</span>
       ${action}
     </li>`;
